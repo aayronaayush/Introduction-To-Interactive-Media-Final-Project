@@ -1,4 +1,9 @@
 import processing.serial.*;
+PImage bedroomImg;
+PImage balconyImg;
+PImage gameRoomImg;
+PImage livingRoomImg;
+PImage diningRoomImg;
 
 Serial myPort;
 int input;
@@ -10,7 +15,12 @@ void setup(){
   String portname = Serial.list()[0];
   println(portname);
   myPort = new Serial(this, portname,9600);
-  
+  // load images
+  bedroomImg = loadImage("bedroom.jpg");
+  balconyImg = loadImage("balcony.jpg");
+  gameRoomImg = loadImage("gameRoom.jpg");
+  livingRoomImg = loadImage("livingRoom.jpg");
+  diningRoomImg = loadImage("diningRoom.jpg");
 }
 
 void draw(){
@@ -59,28 +69,32 @@ void drawOutlines(){
 
 void drawBedroom(){
   pushStyle();
-  fill(0,255,0);
-  rect(0,0,853,800);
+  //fill(0,255,0);
+  //rect(0,0,853,800);
+  image(bedroomImg,0,0);
   popStyle();
 }
 
 void drawBalcony(){
   pushStyle();
-  fill(0,255,0);
-  rect(853,0,853,800);
+  //fill(0,255,0);
+  //rect(853,0,853,800);
+  image(balconyImg,853,0);
   popStyle();
 }
 
 void drawGameroom(){
   pushStyle();
-  fill(0,255,0);
-  rect(1706,0,853,800);
+  //fill(0,255,0);
+  //rect(1706,0,853,800);
+  image(gameRoomImg,1706,0);
   popStyle();
 }
 
 void drawLivingroom(){
   pushStyle();
-  fill(0,255,0);
-  rect(0,800,1280,800);
+  //fill(0,255,0);
+  //rect(0,800,1280,800);
+  image(livingRoomImg,0,800);
   popStyle();
 }
