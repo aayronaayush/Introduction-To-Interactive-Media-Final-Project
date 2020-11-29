@@ -73,7 +73,7 @@ void drawBedroom(){
   pushStyle();
   //fill(0,255,0);
   //rect(0,0,853,800);
-  image(bedroomImg,0,0);
+  image(bedroomImg,0,0, width/3, height/2);
   popStyle();
 }
 
@@ -81,7 +81,7 @@ void drawBalcony(){
   pushStyle();
   //fill(0,255,0);
   //rect(853,0,853,800);
-  image(balconyImg,853,0);
+  image(balconyImg,width/3 ,0, width/3, height/2);
   popStyle();
 }
 
@@ -89,7 +89,7 @@ void drawGameroom(){
   pushStyle();
   //fill(0,255,0);
   //rect(1706,0,853,800);
-  image(gameRoomImg,1706,0);
+  image(gameRoomImg,(width/3)*2 ,0, width/3, height/2);
   popStyle();
 }
 
@@ -97,7 +97,7 @@ void drawLivingroom(){
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
-  image(livingRoomImg,0,800);
+  image(livingRoomImg,0,height/2, width/2, height/2);
   popStyle();
 }
 
@@ -105,7 +105,7 @@ void drawDiningRoom(){
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
-  image(diningRoomImg,1280,800);
+  image(diningRoomImg,width/2,height/2);
   popStyle();
   println("dining room called");
 }
