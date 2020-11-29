@@ -2,6 +2,7 @@ int bedroom = 2; //
 int balcony = 3; 
 int gameroom = 4;
 int livingRoom = 5;
+int diningRoom = 6;
 
 void setup() {
   // put your setup code here, to run once:
@@ -10,6 +11,7 @@ void setup() {
   pinMode(balcony, INPUT);
   pinMode(gameroom, INPUT);
   pinMode(livingRoom, INPUT);
+  pinMode(diningRoom, INPUT);
 
 }
 
@@ -29,5 +31,7 @@ void detectRoom(){
     Serial.write(4);
   } else if(digitalRead(livingRoom)==1){
     Serial.write(5);
+  } else if(digitalRead(diningRoom)==1){
+    Serial.write(6);
   }
 }

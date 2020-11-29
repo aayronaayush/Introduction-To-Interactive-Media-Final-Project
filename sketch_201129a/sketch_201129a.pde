@@ -41,6 +41,8 @@ void serialEvent(Serial myPort){
   }
   else if (input==5) {
     currentRoom = 5;
+  } else if(input==6){
+    currentRoom = 6;
   }
 }
 
@@ -55,7 +57,7 @@ void drawRoom(){
   } else if(currentRoom==5){
     drawLivingroom();
   } else if(currentRoom==6){
-    // dining room
+    drawDiningRoom();
   }
 }
 
@@ -97,4 +99,13 @@ void drawLivingroom(){
   //rect(0,800,1280,800);
   image(livingRoomImg,0,800);
   popStyle();
+}
+
+void drawDiningRoom(){
+  pushStyle();
+  //fill(0,255,0);
+  //rect(0,800,1280,800);
+  image(diningRoomImg,1280,800);
+  popStyle();
+  println("dining room called");
 }
