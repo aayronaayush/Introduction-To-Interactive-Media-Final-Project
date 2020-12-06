@@ -32,17 +32,23 @@ void serialEvent(Serial myPort){
   input = myPort.read();
   if (input==2){
     currentRoom = 2;
+    myPort.write(2);
   }
   else if (input==3){
     currentRoom = 3;
+    myPort.write(3);
   }
   else if (input==4) {
     currentRoom = 4;
+    myPort.write(4);
   }
   else if (input==5) {
     currentRoom = 5;
-  } else if(input==6){
+    myPort.write(5);
+  } 
+  else if(input==6){
     currentRoom = 6;
+    myPort.write(6);
   }
 }
 
