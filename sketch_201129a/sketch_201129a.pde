@@ -28,9 +28,11 @@ void setup(){
   livingRoomImg = loadImage("livingRoom.jpg");
   diningRoomImg = loadImage("diningRoom.jpg");
   
-  //load sound
+  //load sounds
   flushingSound = new SoundFile(this,"flush.mp3");
-  livingRoomVideo = new Movie(this,"livingroom.mov");
+  
+  //load video
+  livingRoomVideo = new Movie(this,"livingroom.avi");
   livingRoomVideo.loop();
   //flushingSound.play();
 }
@@ -90,7 +92,7 @@ void drawOutlines(){
 }
 
 void drawbalcony(){
-  println("balcony");
+  //println("balcony");
   pushStyle();
   //fill(0,255,0);
   //rect(0,0,853,800);
@@ -99,7 +101,7 @@ void drawbalcony(){
 }
 
 void drawbathroom(){
-  println("bathroom");
+  //println("bathroom");
   pushStyle();
   if (!flushingSound.isPlaying()){
     flushingSound.play();
@@ -114,7 +116,7 @@ void drawbedRoom(){
   pushStyle();
   count++;
   println(count);
-  println("bedroom");
+  //println("bedroom");
   //fill(0,255,0);
   //rect(1706,0,853,800);
   image(bathRoomImg,(width/3)*2 ,0, width/3, height/2);
@@ -123,7 +125,7 @@ void drawbedRoom(){
 
 void drawdiningRoom(){
   pushStyle();
-  println("dining room");
+  //println("dining room");
   //fill(0,255,0);
   //rect(0,800,1280,800);
   image(diningRoomImg,0,height/2, width/2, height/2);
@@ -134,7 +136,7 @@ void drawlivingRoom(){
   if(!livingRoomVideo.isPlaying()){
     livingRoomVideo.loop();
   }
-  println("living room");
+  //println("living room");
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
