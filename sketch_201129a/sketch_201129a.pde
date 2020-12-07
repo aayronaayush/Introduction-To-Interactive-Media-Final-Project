@@ -10,9 +10,10 @@ int input;
 int currentRoom = -1;
 
 void setup(){
-  size(2560,1600);
+  //size(2560,1600);
+  fullScreen();
   printArray(Serial.list());
-  String portname = Serial.list()[0];
+  String portname = Serial.list()[3];
   println(portname);
   myPort = new Serial(this, portname,9600);
   // load images
@@ -24,7 +25,7 @@ void setup(){
 }
 
 void draw(){
-  background(255);
+  background(0);
   drawRoom();
 }
 
@@ -56,6 +57,7 @@ void drawRoom(){
   drawOutlines();
   if (currentRoom==2){
     drawBedroom();
+    println("bedroom");
   } else if (currentRoom==3){
     drawBalcony();
   } else if(currentRoom==4){
@@ -68,11 +70,12 @@ void drawRoom(){
 }
 
 void drawOutlines(){
-  rect(0,0,853,800); //bedroom
-  rect(853,0,853,800); //balcony
-  rect(1706,0,853,800); //game room
-  rect(0,800,1280,800); //living room
-  rect(800,1280,1280,800); // dining room
+  fill(0);
+  rect(0,0,width/3,height/2); //bedroom
+  rect(width/3,0,width/3,height/2); //balcony
+  rect(2*width/3,0,width/3,height/2); //game room
+  rect(0,height/2,width/2,height/2); //living room
+  rect(width/2,height/2,width/2,height/2); // dining room
 }
 
 void drawBedroom(){
@@ -103,7 +106,7 @@ void drawLivingroom(){
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
-  image(livingRoomImg,0,height/2, width/2, height/2);
+  image(diningRoomImg,0,height/2, width/2, height/2);
   popStyle();
 }
 
@@ -111,7 +114,7 @@ void drawDiningRoom(){
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
-  image(diningRoomImg,width/2,height/2);
+  image(livingRoomImg,width/2,height/2);
   popStyle();
   println("dining room called");
 }
