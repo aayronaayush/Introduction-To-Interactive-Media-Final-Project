@@ -1,27 +1,38 @@
 import processing.serial.*;
+import processing.sound.*;
+import processing.video.*;
+Movie livingRoomVideo;
+SoundFile flushingSound;
 PImage bedroomImg;
 PImage balconyImg;
-PImage gameRoomImg;
+PImage bathRoomImg;
 PImage livingRoomImg;
 PImage diningRoomImg;
 
 Serial myPort;
 int input;
 int currentRoom = -1;
+int count = 0;
 
 void setup(){
   //size(2560,1600);
   fullScreen();
   printArray(Serial.list());
-  String portname = Serial.list()[3];
+  String portname = Serial.list()[0];
   println(portname);
   myPort = new Serial(this, portname,9600);
   // load images
   bedroomImg = loadImage("bedroom.jpg");
   balconyImg = loadImage("balcony.jpg");
-  gameRoomImg = loadImage("gameRoom.jpg");
+  bathRoomImg = loadImage("gameRoom.jpg");
   livingRoomImg = loadImage("livingRoom.jpg");
   diningRoomImg = loadImage("diningRoom.jpg");
+  
+  //load sound
+  flushingSound = new SoundFile(this,"flush.mp3");
+  livingRoomVideo = new Movie(this,"livingroom.mov");
+  livingRoomVideo.loop();
+  //flushingSound.play();
 }
 
 void draw(){
@@ -56,16 +67,16 @@ void serialEvent(Serial myPort){
 void drawRoom(){
   drawOutlines();
   if (currentRoom==2){
-    drawBedroom();
-    println("bedroom");
+    drawbalcony();
+    //println("bedroom");
   } else if (currentRoom==3){
-    drawBalcony();
+    drawbathroom();
   } else if(currentRoom==4){
-    drawGameroom();
+    drawbedRoom();
   } else if(currentRoom==5){
-    drawLivingroom();
+    drawdiningRoom();
   } else if(currentRoom==6){
-    drawDiningRoom();
+    drawlivingRoom();
   }
 }
 
@@ -78,7 +89,8 @@ void drawOutlines(){
   rect(width/2,height/2,width/2,height/2); // dining room
 }
 
-void drawBedroom(){
+void drawbalcony(){
+  println("balcony");
   pushStyle();
   //fill(0,255,0);
   //rect(0,0,853,800);
@@ -86,35 +98,47 @@ void drawBedroom(){
   popStyle();
 }
 
-void drawBalcony(){
+void drawbathroom(){
+  println("bathroom");
   pushStyle();
+  if (!flushingSound.isPlaying()){
+    flushingSound.play();
+  }
   //fill(0,255,0);
   //rect(853,0,853,800);
   image(balconyImg,width/3 ,0, width/3, height/2);
   popStyle();
 }
 
-void drawGameroom(){
+void drawbedRoom(){
   pushStyle();
+  count++;
+  println(count);
+  println("bedroom");
   //fill(0,255,0);
   //rect(1706,0,853,800);
-  image(gameRoomImg,(width/3)*2 ,0, width/3, height/2);
+  image(bathRoomImg,(width/3)*2 ,0, width/3, height/2);
   popStyle();
 }
 
-void drawLivingroom(){
+void drawdiningRoom(){
   pushStyle();
+  println("dining room");
   //fill(0,255,0);
   //rect(0,800,1280,800);
   image(diningRoomImg,0,height/2, width/2, height/2);
   popStyle();
 }
 
-void drawDiningRoom(){
+void drawlivingRoom(){
+  if(!livingRoomVideo.isPlaying()){
+    livingRoomVideo.loop();
+  }
+  println("living room");
   pushStyle();
   //fill(0,255,0);
   //rect(0,800,1280,800);
   image(livingRoomImg,width/2,height/2);
   popStyle();
-  println("dining room called");
+  //println("dining room called");
 }
