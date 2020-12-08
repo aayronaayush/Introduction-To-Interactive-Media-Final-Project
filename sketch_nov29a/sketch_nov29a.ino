@@ -31,7 +31,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 //  Serial.println(digitalRead(livingRoom));
   detectRoom();
 //  Serial.println(analogRead(diningRoom));
@@ -42,23 +41,23 @@ void detectRoom(){
   if (analogRead(bedroom)>100){
     Serial.write(2);
     bedroomOperation(2);
-//    Serial.println("analogRead(bedroom)/");
+    Serial.println("analogRead(balcony)/");
   } else if(analogRead(balcony)>100){
     Serial.write(3);
     bedroomOperation(3);
-//    Serial.println("analogRead(balcony)");/
+    Serial.println("analogRead(bathroom)");
   } else if(analogRead(gameroom)>100){
     Serial.write(4);
     bedroomOperation(4);
-//    Serial.println("analogRead(gameroom)");/
+    Serial.println("analogRead(bedroom)");
   } else if(analogRead(livingRoom)>100){
     Serial.write(5);
     bedroomOperation(5);
-//    Serial.println("analogRead(livingroom)");/
+    Serial.println("analogRead(diningroom)");
   } else if(analogRead(diningRoom)>100){
     Serial.write(6);
     bedroomOperation(6);
-//    Serial.println("analogRead(diningRoom)");/
+    Serial.println("analogRead(livingRoom)");
   }
 }
 
