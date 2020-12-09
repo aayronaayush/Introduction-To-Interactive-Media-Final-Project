@@ -11,9 +11,10 @@ PImage diningRoomImg;
 Movie livingRoomVideo;
 Movie bedroomVideo;
 Movie balconyVideo;
+Movie diningRoomVideo;
 SoundFile flushingSound;
 SoundFile balconyMusic;
-
+int playOnce = -1;
 Serial myPort;
 int input;
 int currentRoom = -1;
@@ -23,20 +24,22 @@ void setup() {
   //size(2560,1600);
   fullScreen();
   printArray(Serial.list());
-  String portname = Serial.list()[0];
+  String portname = Serial.list()[3];
   println(portname);
   myPort = new Serial(this, portname, 9600);
   // load images
   bedroomImg = loadImage("bedroom.png");
   balconyImg = loadImage("balcony.png");
-  bathRoomImg = loadImage("gameRoom.jpg");
+  bathRoomImg = loadImage("bathroom.jpg");
   livingRoomImg = loadImage("livingRoom.jpg");
-  diningRoomImg = loadImage("diningRoom.png");
+  diningRoomImg = loadImage("diningRoom_old.png");
 
   //load sounds
   flushingSound = new SoundFile(this, "flush.mp3");
   balconyMusic = new SoundFile(this, "BalconyMusic.mp3");
+
   //load video
+  diningRoomVideo = new Movie(this, "diningRoom.mp4");
   livingRoomVideo = new Movie(this, "livingroom.mov");
   bedroomVideo = new Movie(this, "bedroomScenery.mp4");
   balconyVideo = new Movie(this, "BalconyScenery.mp4");
@@ -83,6 +86,9 @@ void drawRoom() {
   if (currentRoom!=2 && balconyMusic.isPlaying()) { //stop balcony music
     balconyMusic.stop();
   }
+  if (currentRoom !=3) {
+    playOnce = -1;
+  }
   if (currentRoom!=4 && bedroomVideo.isPlaying()) { //stop bedroom video
     bedroomVideo.stop();
   }
@@ -113,6 +119,11 @@ void drawRoom() {
     popStyle();
     drawbedRoom();
   } else if (currentRoom==5) {
+    pushStyle();
+    //imageMode(CENTER);
+    //float scaleFactor = 0.6;
+    image(diningRoomVideo, 0, height/2, width/2, height/2);
+    popStyle();
     drawdiningRoom();
   } else if (currentRoom==6) {
     drawlivingRoom();
@@ -142,6 +153,7 @@ void drawbalcony() {
     balconyVideo.jump(30);
   }
   if (!balconyMusic.isPlaying()) {
+    balconyMusic.cue(2.8);
     balconyMusic.loop();
   };
   pushStyle();
@@ -151,9 +163,14 @@ void drawbalcony() {
 
 void drawbathroom() {
   //println("bathroom");
+  //if (frameCount == playFR + 180) {
+  //  flushingSound.pause();
+  //}
   pushStyle();
-  if (!flushingSound.isPlaying()) {
+  if (!flushingSound.isPlaying() && playOnce == -1) {
     flushingSound.play();
+    playOnce = 1;
+    //playFR = frameCount;
   }
   image(bathRoomImg, width/3, 0, width/3, height/2);
   popStyle();
@@ -174,7 +191,11 @@ void drawbedRoom() {
 
 void drawdiningRoom() {
   pushStyle();
-  image(diningRoomImg, 0, height/2, width/2, height/2);
+  //image(diningRoomImg, 0, height/2, width/2, height/2);
+  if (!diningRoomVideo.isPlaying()) {
+    diningRoomVideo.loop();
+    //livingRoomVideo.volume(100);
+  }
   popStyle();
 }
 
